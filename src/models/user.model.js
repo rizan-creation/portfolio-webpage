@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"; // 1. Added 'model' here
+import { Schema, model } from "mongoose"; 
 import bcrypt from "bcrypt";
 
 const userSchema = new Schema({
@@ -11,8 +11,8 @@ const userSchema = new Schema({
         match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Please fill a valid email address']
     },
     password: {
-        type: String,   // 2. Changed 'string' to 'String' (Capitalized)
-        required: true, // 3. Changed 'false' to 'true'
+        type: String,  
+        required: true, 
     }
 });
 
