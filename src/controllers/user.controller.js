@@ -11,7 +11,7 @@ try {
     })
 } catch (error) { res.status(500).json({
         success: false,
-        message: `something went wrong: ${error}`,
+        message: `something went wrong: {error.message}`,
      })}
 };
 const login = async (req, res) => {};

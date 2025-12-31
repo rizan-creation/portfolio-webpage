@@ -15,8 +15,9 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true}));
 
 connectDB();
-const PORT = process.env.PORT ;
-app.use("/api/users", userRoutes)
+const PORT = process.env.PORT || 8000;
+app.use("/api/v1", userRoutes)
+
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
