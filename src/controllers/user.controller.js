@@ -2,6 +2,7 @@ import console from "console";
 import User from "../models/user.model.js"
 import bcrypt from "bcrypt";
 import authConfigs from "../configs/auth.config.js";
+
 const register = async (req, res) => {
     console.log(req);
 try {
@@ -29,8 +30,9 @@ try {
         return res.status(404).json({ success: false, message: "Failed to login"});
     }
 //user in  database -> match the password.
-const isMatched = await bcrypt.compare(password, user,password)
+const isMatched = await bcrypt.compare(password, user.password)
 // password do not match -> throw error.
+ 
 if(!isMatched) {
     return res.status(404).JSON({ success: false, message: "Failed to login"});
 } else {
@@ -45,10 +47,11 @@ res.status(200).json({
     success: true,
     message: "Successfuly logged in",
     user: {
-        id: user?.id,
-        email: user?.email
+        id: user?._id,
+        email: user?.email,
+          token: token,
     },
-    token: token,
+  
 });
 } catch (error) {
     res.status(500).json({

@@ -1,10 +1,12 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv"
+dotenv.config();
 import jwt from "jsonwebtoken"
 const encodeToken = (email, id) => {
     const payload = {email, id};
     const key = process.env.JWT_KEY;
     const expire = process.env.JWT_EXPIRES_IN
-    return jwt.sign(payload, key, {expiresIn: expire});
+    
+    return jwt.sign(payload, key, { expiresIn: expire });
 };
 const decodeToken = () => {};
 
