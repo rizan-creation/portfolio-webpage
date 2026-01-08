@@ -24,7 +24,7 @@ try {
         //get email and password fromm request body
     const {email,password} = req.body;
     //find if the user exist in the database using email
-    const user = await User .findone ({email});
+    const user = await User.findOne ({ email });
     // user is not in database -> throw error
     if (!user) {
         return res.status(404).json({ success: false, message: "Failed to login"});
@@ -32,13 +32,14 @@ try {
 //user in  database -> match the password.
 const isMatched = await bcrypt.compare(password, user.password)
 // password do not match -> throw error.
- 
+ let token;
+
 if(!isMatched) {
-    return res.status(404).JSON({ success: false, message: "Failed to login"});
+    return res.status(404).json({ success: false, message: "Failed to login"});
 } else {
 // password match -> token generate (jwt).
 
-const token = authConfigs.encodeToken(user?.email, user?._id?.toString());
+ token = authConfigs.encodeToken(user?.email, user?._id?.toString());
 }
 // store token in the  cookies.
 res.cookie("user-token", token);
